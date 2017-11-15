@@ -4,11 +4,15 @@ services:
     image: mongo:3.4.10-jessie
     expose:
       - "27017"
+    logging:
+      driver: none
 
   redis-server:
     image: redis:3.2.9-alpine
     expose:
       - "6379"
+    logging:
+      driver: none
 
   mysql-server:
     image: mysql:5.6
@@ -22,6 +26,8 @@ services:
       interval: 5s
       timeout: 10s
       retries: 5
+    logging:
+      driver: none
 
   zookeeper-server:
     image: zookeeper:3.4.9
@@ -34,6 +40,8 @@ services:
       interval: 10s
       timeout: 10s
       retries: 5
+    logging:
+      driver: none
 
   skywalking-webui:
     image: skywalking/skywalking-ui:3.2.4-2017
@@ -48,6 +56,8 @@ services:
         condition: service_healthy
     environment:
       - COLLECTOR_SERVERS=skywalking-collector:10800
+    logging:
+      driver: none
 
   skywalking-collector:
     image: skywalking/skywalking-collector:3.2.4-2017
@@ -78,6 +88,8 @@ services:
       interval: 10s
       timeout: 10s
       retries: 5
+    logging:
+      driver: none
 
   es-server:
     image: elasticsearch:5.3
@@ -96,9 +108,13 @@ services:
       interval: 10s
       timeout: 10s
       retries: 5
+    logging:
+      driver: none
 
   skywalking-agent:
     image: skywalking/skywalking-agent:3.2.4-2017
+    logging:
+      driver: none
 
   cache-server:
     image: skywalking/test-cache-server:3.2.4-2017
@@ -117,6 +133,8 @@ services:
       - COLLECTOR_SERVERS=skywalking-collector:10800
     volumes_from:
       - skywalking-agent
+    logging:
+      driver: none
 
   presistence-server:
     image: skywalking/test-persistence-server:3.2.4-2017
@@ -133,6 +151,8 @@ services:
       - COLLECTOR_SERVERS=skywalking-collector:10800
     volumes_from:
       - skywalking-agent
+    logging:
+      driver: none
 
   portal-service:
     image: skywalking/test-portal:3.2.4-2017
@@ -149,3 +169,5 @@ services:
       - COLLECTOR_SERVERS=skywalking-collector:10800
     volumes_from:
       - skywalking-agent
+    logging:
+      driver: none
